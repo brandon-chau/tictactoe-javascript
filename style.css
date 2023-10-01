@@ -1,0 +1,161 @@
+/* Box sizing for all elements, including ::before and ::after pseudo-elements */
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+/* CSS custom properties (variables) defined for cell size and mark size */
+:root {
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+/* Reset body margin to remove default spacing */
+body {
+    margin: 0;
+}
+
+/* Styling for the game board */
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(3, auto);
+    cursor: pointer;
+}
+
+/* Styling for individual cells on the board */
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 3px solid black;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling to remove top border of the first row of cells */
+.cell:nth-child(-n+3) {
+    border-top: none;
+}
+
+/* Styling to remove bottom border of the last row of cells */
+.cell:nth-child(-n+9) {
+    border-bottom: none;
+}
+
+/* Styling to remove left and right borders for the first column of cells */
+.cell:nth-child(3n + 1) {
+    border-left: none;
+    border-right: none;
+}
+
+/* Styling to remove left and right borders for the last column of cells */
+.cell:nth-child(3n) {
+    border-left: none;
+    border-right: none;
+}
+
+/* Styling for X and O cells to prevent them from being clicked again */
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
+/* Styling for the marks (X and O) inside the cells */
+.cell.x::before,
+.cell.x::after,
+.cell.o::before,
+.cell.o::after {
+    background-color: black;
+}
+
+/* Styling for the hover effect on cells when selecting a mark (X or O) */
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    background-color: lightgray;
+}
+
+/* Styling for the X mark and its rotation */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    content: '';
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+    position: absolute;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+
+/* Styling for the O mark and its size */
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: '';
+    width: calc(var(--mark-size) * .9);
+    height: calc(var(--mark-size) * .9);
+    border-radius: 50%;
+    position: absolute;
+}
+
+/* Styling to resize the O mark and add a white background color */
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+    width: calc(var(--mark-size) * .65);
+    height: calc(var(--mark-size) * .65);
+    background-color: white;
+}
+
+/* Styling for the winning message overlay */
+.winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+/* Styling for the restart button within the winning message */
+.winning-message button {
+    font-size: 3rem;
+    background-color: white;
+    border:1px solid black;
+    padding: .25em .5em; /* Changed ',' to '.' to fix padding syntax */
+    cursor: pointer;
+}
+
+/* Styling for the restart button when hovering */
+.winning-message button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+/* Styling to show the winning message overlay */
+.winning-message.show {
+    display: flex;
+}

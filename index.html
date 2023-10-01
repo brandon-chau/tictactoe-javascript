@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Linking the external CSS file -->
+    <script src="script.js" defer></script> <!-- Including the external JavaScript file -->
+</head>
+<body>
+    <!-- Game board containing 9 cells -->
+    <div class="board" id="board">
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+    </div>
+    
+    <!-- Winning message overlay -->
+    <div class="winning-message" id="winningMessage">
+        <!-- Element to display the winning message or draw message -->
+        <div data-winning-message-text></div>
+        <!-- Restart button to start a new game -->
+        <button id="restartButton">Restart</button>
+    </div>
+</body>
+</html>
